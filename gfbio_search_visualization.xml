@@ -4,8 +4,10 @@
 		author="Marburg">
 		<Require feature="pubsub-2">
 			<Param name="topics">
+                <![CDATA[
 				<Topic title="GFBio Listener" name="gfbio.search.selectedData.listener"
-					   description="Listens to GFBio Search data" type="string" subscribe="true" />
+                	   description="Listens to GFBio Search data" type="string" subscribe="true" />
+                ]]>
 			</Param>
 		</Require>
 	</ModulePrefs>
