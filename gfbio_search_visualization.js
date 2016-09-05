@@ -45,6 +45,7 @@ var SearchVisualization = (function() {
      */
     function initialize() {
         map = new ol.Map({
+            controls: undefined,
             layers: [
                 new ol.layer.Tile({
                     source: backgroundLayerSource
