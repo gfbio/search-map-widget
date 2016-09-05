@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+	<ModulePrefs title="Search Visualization" height="300"
+		author="Marburg">
+		<Require feature="pubsub-2">
+			<Param name="topics">
+				<Topic title="GFBio Listener" name="gfbio.search.selectedData.listener"
+					   description="Listens to GFBio Search data" type="string" subscribe="true" />
+			</Param>
+		</Require>
+	</ModulePrefs>
+	<Content type="html">
+	<![CDATA[
+	<!DOCTYPE html>
+		<html>
+			<head>
+				<title>Search Visualization</title>
+				<style type="text/css">
+					html, body, iframe {
+						width: 100%;
+						height: 100%;
+						margin: 0;
+						padding: 0;
+					}
+					body {
+					 	background: #000;
+					}
+                    iframe {
+                        border: none;
+                    }
+				</style>
+				<script type="text/javascript">
+				    var iframe = undefined;
+				
+					function receiveVisualizationRequest(topic, data, subscriberData) {
+						var contentWindow = iframe[0].contentWindow;
+                
+		                contentWindow.postMessage(data, '*');
+					}
+					
+					gadgets.HubSettings.onConnect = function(hub, suc, err) {
+						gadgets.Hub.subscribe('gfbio.search.selectedData', receiveVisualizationRequest);
+					};
+
+                    document.addEventListener("DOMContentLoaded", function() {
+                        iframe = document.createElement('iframe');
+                        iframe.id = 'searchVisualizationFrame';
+                        iframe.src = 'http://pc12388.mathematik.uni-marburg.de:8080/gfbio_search_visualization.html';
+                        document.getElementsByTagName('body')[0].appendChild(iframe);
+                    });
+				</script>
+			</head>
+			<body></body>
+		</html>
+	]]>
+	</Content>
+</Module>
