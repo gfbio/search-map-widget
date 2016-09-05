@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-	<ModulePrefs title="Search Visualization" height="300"
-		author="Marburg">
+	<ModulePrefs title="Search Visualization" author="Database Research Group of Uni Marburg">
 		<Require feature="pubsub-2">
 			<Param name="topics">
                 <![CDATA[
@@ -11,7 +10,7 @@
 			</Param>
 		</Require>
 	</ModulePrefs>
-	<Content type="html">
+	<Content type="html" preferred_height="300">
 	<![CDATA[
 	<!DOCTYPE html>
 		<html>
