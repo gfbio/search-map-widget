@@ -6,9 +6,11 @@ var SearchVisualization = (function() {
 
     /**
      * Background Layer
-     * @type {ol.source.Source}
+     * @type {ol.layer.Layer}
      */
-    var backgroundLayerSource = new ol.source.OSM();
+    var backgroundLayer = new ol.layer.Tile({
+        source: new ol.source.OSM()
+    });
 
     /**
      * Maximum Zoom Level
@@ -47,9 +49,7 @@ var SearchVisualization = (function() {
         map = new ol.Map({
             controls: [],
             layers: [
-                new ol.layer.Tile({
-                    source: backgroundLayerSource
-                })
+                backgroundLayer
             ],
             target: 'map',
             view: new ol.View({
@@ -67,6 +67,7 @@ var SearchVisualization = (function() {
     function receiveMessage(event) {
         // reset map layers and extent
         map.getLayers().clear();
+        map.getLayers().push(backgroundLayer);
         extent = undefined;
 
         var datasets = event.data.selected;
