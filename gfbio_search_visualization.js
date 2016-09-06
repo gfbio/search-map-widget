@@ -107,7 +107,9 @@ var SearchVisualization = (function() {
      * }} dataset
      */
     function processDataset(dataset) {
-        var vectorSource = new ol.source.Vector();
+        var vectorSource = new ol.source.Vector({
+            wrapX: false
+        });
         var geometry = getGeometry(dataset.minLongitude, dataset.maxLongitude, dataset.minLatitude, dataset.maxLatitude);
         geometry.applyTransform(ol.proj.getTransform(sourceSrs, mapSrs));
         vectorSource.addFeature(
