@@ -19,7 +19,7 @@
         <script type="text/javascript">
             document.addEventListener("DOMContentLoaded", function() {
                 SearchVisualization.initialize();
-                window.addEventListener('message', SearchVisualization.receiveMessage);
+                window.addEventListener('message', SearchVisualization.receiveMessage, false);
             });
         </script>
     </head>

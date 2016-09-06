@@ -45,7 +45,7 @@ var SearchVisualization = (function() {
      */
     function initialize() {
         console.log('INITIALIZATION');
-        
+
         map = new ol.Map({
             controls: [],
             layers: [
@@ -67,7 +67,7 @@ var SearchVisualization = (function() {
      * @param event
      */
     function receiveMessage(event) {
-        console.log('received message');
+        console.log('received message', event);
 
         // reset map layers and extent
         map.getLayers().clear();
