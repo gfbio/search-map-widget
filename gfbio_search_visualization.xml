@@ -12,47 +12,31 @@
 	</ModulePrefs>
 	<Content type="html" preferred_height="300">
 	<![CDATA[
-	<!DOCTYPE html>
-		<html>
-			<head>
-				<title>Search Visualization</title>
-				<style type="text/css">
-					html, body, iframe {
-						width: 100%;
-						height: 100%;
-						margin: 0;
-						padding: 0;
-					}
-					body {
-					 	background: #000;
-					}
-                    iframe {
-                        border: none;
-                    }
-				</style>
-				<script type="text/javascript">
-				    var iframe = undefined;
-				
-					function receiveVisualizationRequest(topic, data, subscriberData) {
-						var contentWindow = iframe[0].contentWindow;
-                
-		                contentWindow.postMessage(data, '*');
-					}
-					
-					gadgets.HubSettings.onConnect = function(hub, suc, err) {
-						gadgets.Hub.subscribe('gfbio.search.selectedData', receiveVisualizationRequest);
-					};
+        <script type="text/javascript">
+            var iframe = undefined;
 
-                    document.addEventListener("DOMContentLoaded", function() {
-                        iframe = document.createElement('iframe');
-                        iframe.id = 'searchVisualizationFrame';
-                        iframe.src = 'http://pc12388.mathematik.uni-marburg.de/search_widget/gfbio_search_visualization.html';
-                        document.getElementsByTagName('body')[0].appendChild(iframe);
-                    });
-				</script>
-			</head>
-			<body></body>
-		</html>
+            function receiveVisualizationRequest(topic, data, subscriberData) {
+                var contentWindow = iframe[0].contentWindow;
+
+                contentWindow.postMessage(data, '*');
+            }
+
+            gadgets.HubSettings.onConnect = function(hub, suc, err) {
+                gadgets.Hub.subscribe('gfbio.search.selectedData', receiveVisualizationRequest);
+            };
+
+            (function() {
+                iframe = document.createElement('iframe');
+                iframe.id = 'searchVisualizationFrame';
+                iframe.src = 'http://pc12388.mathematik.uni-marburg.de/search_widget/gfbio_search_visualization.html';
+                iframe.style.border = 'none';
+                iframe.style.margin = 0;
+                iframe.style.padding = 0;
+                iframe.style.height = '100%';
+                iframe.style.width = '100%';
+                document.appendChild(iframe);
+            })();
+        </script>
 	]]>
 	</Content>
 </Module>
