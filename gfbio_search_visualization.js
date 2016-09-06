@@ -9,8 +9,9 @@ var SearchVisualization = (function() {
      * @type {ol.layer.Layer}
      */
     var backgroundLayer = new ol.layer.Tile({
-        source: new ol.source.OSM(),
-        wrapX: false
+        source: new ol.source.OSM({
+            wrapX: false
+        })
     });
 
     /**
