@@ -44,8 +44,6 @@ var SearchVisualization = (function() {
      * Initialize the map.
      */
     function initialize() {
-        console.log('INITIALIZATION');
-
         map = new ol.Map({
             controls: [],
             layers: [
@@ -67,8 +65,6 @@ var SearchVisualization = (function() {
      * @param event
      */
     function receiveMessage(event) {
-        console.log('received message', event);
-
         // reset map layers and extent
         map.getLayers().clear();
         extent = undefined;
@@ -86,7 +82,7 @@ var SearchVisualization = (function() {
      */
     function focus() {
         var view = map.getView();
-        view.fitExtent(extent, map.getSize());
+        view.fit(extent, map.getSize());
 
         if (view.getZoom() > maximumZoomLevel) {
             view.setZoom(maximumZoomLevel);
