@@ -16,6 +16,8 @@
             var iframe = undefined;
 
             function receiveVisualizationRequest(topic, data, subscriberData) {
+                console.log(topic, data, subscriberData);
+
                 var contentWindow = iframe[0].contentWindow;
 
                 contentWindow.postMessage(data, '*');
