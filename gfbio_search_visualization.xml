@@ -34,7 +34,7 @@
                 iframe.style.padding = 0;
                 iframe.style.height = '100%';
                 iframe.style.width = '100%';
-                document.appendChild(iframe);
+                document.getElementsByName('body')[0].appendChild(iframe);
             })();
         </script>
 	]]>
