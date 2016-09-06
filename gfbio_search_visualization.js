@@ -9,7 +9,8 @@ var SearchVisualization = (function() {
      * @type {ol.layer.Layer}
      */
     var backgroundLayer = new ol.layer.Tile({
-        source: new ol.source.OSM()
+        source: new ol.source.OSM(),
+        wrapX: false
     });
 
     /**
@@ -20,15 +21,15 @@ var SearchVisualization = (function() {
 
     /**
      * Source SRS
-     * @const {ol.ProjectionLike}
+     * @const {ol.Projection}
      */
-    var sourceSrs = 'EPSG:4326';
+    var sourceSrs = ol.proj.get('EPSG:4326');
 
     /**
      * Map SRS
-     * @const {ol.ProjectionLike}
+     * @const {ol.Projection}
      */
-    var mapSrs = 'EPSG:3857';
+    var mapSrs = ol.proj.get('EPSG:3857');
 
     /**
      * The map reference.
@@ -55,7 +56,8 @@ var SearchVisualization = (function() {
             view: new ol.View({
                 center: [0, 0],
                 zoom: 2,
-                projection: mapSrs
+                projection: mapSrs,
+                extent: mapSrs.getExtent()
             })
         });
     }
