@@ -147,12 +147,13 @@ var SearchVisualization = (function() {
         var equalLon = minLon === maxLon;
         var equalLat = minLat === maxLat;
 
+        minLat = Math.max(minLat, -89.99999);
+        maxLat = Math.min(maxLat, 89.99999);
+
         if (equalLon && equalLat) {
             return new ol.geom.Point([minLon, minLat]);
-        } else if (!equalLon && !equalLat) {
-            return new ol.geom.Polygon([[[minLon, minLat], [minLon, maxLat], [maxLon, maxLat], [maxLon, minLat]]]);
         } else {
-            return new ol.geom.LineString([[minLon, maxLon], [minLat, maxLat]]);
+            return new ol.geom.Polygon([[[minLon, minLat], [minLon, maxLat], [maxLon, maxLat], [maxLon, minLat]]]);
         }
     }
 
