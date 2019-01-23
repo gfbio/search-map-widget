@@ -73,7 +73,7 @@ var SearchVisualization = (function() {
         extent = undefined;
 
         var datasets = event.data.selected;
-        if (datasets.length > 0) {
+        if (datasets && datasets.length > 0) {
             datasets.forEach(processDataset);
 
             focus();
