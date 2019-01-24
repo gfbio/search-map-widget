@@ -14,13 +14,13 @@
 			name="visualization_html"
 			display_name="URL to the gfbio_search_visualization.html"
 			required="true"
-			default_value="https://vat.gfbio.org/search_widget/gfbio_search_visualization.html"
+			default_value="https://vat.gfbio.org/search-widget/gfbio_search_visualization.html"
 	/>
 	<Content type="html">
 	<![CDATA[
         <script type="text/javascript">
         	const userPrefs = new gadgets.Prefs();
-        	const visualizationHtml = userPrefs.getFloat('visualization_html');
+        	const visualizationHtml = userPrefs.getString('visualization_html');
 
             let iframe = undefined;
 
