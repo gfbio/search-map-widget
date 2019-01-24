@@ -8,7 +8,7 @@ var SearchVisualization = (function() {
      * Background Layer
      * @type {ol.layer.Layer}
      */
-    var backgroundLayer = new ol.layer.Tile({
+    const backgroundLayer = new ol.layer.Tile({
         source: new ol.source.OSM({
             wrapX: false
         })
@@ -18,31 +18,31 @@ var SearchVisualization = (function() {
      * Maximum Zoom Level
      * @const {number}
      */
-    var maximumZoomLevel = 3;
+    const maximumZoomLevel = 3;
 
     /**
      * Source SRS
      * @const {ol.Projection}
      */
-    var sourceSrs = ol.proj.get('EPSG:4326');
+    const sourceSrs = ol.proj.get('EPSG:4326');
 
     /**
      * Map SRS
      * @const {ol.Projection}
      */
-    var mapSrs = ol.proj.get('EPSG:3857');
+    const mapSrs = ol.proj.get('EPSG:3857');
 
     /**
      * The map reference.
      * @type {ol.Map}
      */
-    var map;
+    let map;
 
     /**
      * The globally visible extent.
      * @type {ol.Extent}
      */
-    var extent = undefined;
+    let extent = undefined;
 
     /**
      * Initialize the map.
@@ -72,7 +72,7 @@ var SearchVisualization = (function() {
         map.getLayers().push(backgroundLayer);
         extent = undefined;
 
-        var datasets = event.data.selected;
+        const datasets = event.data.selected;
         if (datasets && datasets.length > 0) {
             datasets.forEach(processDataset);
 
@@ -84,12 +84,13 @@ var SearchVisualization = (function() {
      * Focus on the current extent.
      */
     function focus() {
-        var view = map.getView();
-        view.fit(extent, map.getSize());
+        const easingDurationMs = 500;
 
-        if (view.getZoom() > maximumZoomLevel) {
-            view.setZoom(maximumZoomLevel);
-        }
+        map.getView().fit(extent, {
+            size: map.getSize(),
+            maxZoom: maximumZoomLevel,
+            duration: easingDurationMs,
+        });
     }
     /**
      * Adds the boundaries of a dataset to the map.
@@ -106,10 +107,10 @@ var SearchVisualization = (function() {
      * }} dataset
      */
     function processDataset(dataset) {
-        var vectorSource = new ol.source.Vector({
+        const vectorSource = new ol.source.Vector({
             wrapX: false
         });
-        var geometry = getGeometry(dataset.minLongitude, dataset.maxLongitude, dataset.minLatitude, dataset.maxLatitude);
+        const geometry = getGeometry(dataset.minLongitude, dataset.maxLongitude, dataset.minLatitude, dataset.maxLatitude);
         geometry.applyTransform(ol.proj.getTransform(sourceSrs, mapSrs));
         vectorSource.addFeature(
             new ol.Feature({
@@ -126,7 +127,7 @@ var SearchVisualization = (function() {
             extent = vectorSource.getExtent();
         }
 
-        var layer = new ol.layer.Vector({
+        const layer = new ol.layer.Vector({
             source: vectorSource,
             style: styleFunction(dataset.color.replace('0x', '#'))
         });
@@ -144,9 +145,10 @@ var SearchVisualization = (function() {
      * @returns {ol.geom.Geometry}
      */
     function getGeometry(minLon, maxLon, minLat, maxLat) {
-        var equalLon = minLon === maxLon;
-        var equalLat = minLat === maxLat;
+        const equalLon = minLon === maxLon;
+        const equalLat = minLat === maxLat;
 
+        // restrict since -90 and 90 cause problems in openlayer's web mercator projection
         minLat = Math.max(minLat, -89.99999);
         maxLat = Math.min(maxLat, 89.99999);
 
@@ -163,7 +165,7 @@ var SearchVisualization = (function() {
      * @returns {{r: number, g: number, b: number}}
      */
     function hexToRgb(hex) {
-        var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
         return result ? {
             r: parseInt(result[1], 16),
             g: parseInt(result[2], 16),
@@ -178,9 +180,9 @@ var SearchVisualization = (function() {
      * @returns {Function}
      */
     function styleFunction(fillColor) {
-        var rgbColor = hexToRgb(fillColor);
+        const rgbColor = hexToRgb(fillColor);
 
-        var styles = {
+        const styles = {
             'MultiPoint': [new ol.style.Style({
                 image: new ol.style.Circle({
                     radius: 5,
