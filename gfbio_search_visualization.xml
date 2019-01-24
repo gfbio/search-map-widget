@@ -10,10 +10,19 @@
 			</Param>
 		</Require>
 	</ModulePrefs>
+	<UserPref
+			name="visualization_html"
+			display_name="URL to the gfbio_search_visualization.html"
+			required="true"
+			default_value="https://vat.gfbio.org/search_widget/gfbio_search_visualization.html"
+	/>
 	<Content type="html">
 	<![CDATA[
         <script type="text/javascript">
-            var iframe = undefined;
+        	const userPrefs = new gadgets.Prefs();
+        	const visualizationHtml = userPrefs.getFloat('visualization_html');
+
+            let iframe = undefined;
 
             /**
              * Receive Liferay event an pass it to the iframe's window.
@@ -34,7 +43,7 @@
             (function() {
                 iframe = document.createElement('iframe');
                 iframe.id = 'searchVisualizationFrame';
-                iframe.src = 'http://pc12388.mathematik.uni-marburg.de/search_widget/gfbio_search_visualization.html';
+                iframe.src = visualizationHtml;
                 iframe.style.border = 'none';
                 iframe.style.margin = 0;
                 iframe.style.padding = 0;
