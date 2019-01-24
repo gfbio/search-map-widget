@@ -1,0 +1,43 @@
+event = {
+    "data": {
+        "selected": [
+            {
+                "title": "TITLE", "Author": "AUTHOR", "dataCenter": "DATACENTER", "color": "#ff0000",
+                "minLongitude": -60, "maxLongitude": -60, "minLatitude": -80, "maxLatitude": 80
+            },
+            {
+                "title": "TITLE", "Author": "AUTHOR", "dataCenter": "DATACENTER", "color": "#fff000",
+                "minLongitude": 0, "maxLongitude": 0, "minLatitude": -90, "maxLatitude": 90
+            },
+            {
+                "title": "TITLE", "Author": "AUTHOR", "dataCenter": "DATACENTER", "color": "#ffff00",
+                "minLongitude": 80, "maxLongitude": 80, "minLatitude": 70, "maxLatitude": 70
+            },
+            {
+                "title": "TITLE", "Author": "AUTHOR", "dataCenter": "DATACENTER", "color": "#00ff00",
+                "minLongitude": 40, "maxLongitude": 60, "minLatitude": 40, "maxLatitude": 60
+            },
+        ]
+    }
+}
+SearchVisualization.receiveMessage(event)
+
+####################################################################################################
+####################################################################################################
+####################################################################################################
+
+event = {
+    "data": {
+        "selected": [
+            {
+                "title": "TITLE", "Author": "AUTHOR", "dataCenter": "DATACENTER", "color": "#ffff00",
+                "minLongitude": 80, "maxLongitude": 80, "minLatitude": 70, "maxLatitude": 70
+            }
+        ]
+    }
+}
+SearchVisualization.receiveMessage(event)
+
+####################################################################################################
+####################################################################################################
+####################################################################################################
